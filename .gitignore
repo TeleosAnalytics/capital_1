@@ -1,0 +1,4 @@
+*.svs
+*.zip
+*.ome.zarr/
+gdc-client
