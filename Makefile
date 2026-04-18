@@ -1,8 +1,8 @@
 # Professional Bootstrap for MASH Project
-.PHONY: setup pull connect all claude-setup
+.PHONY: setup pull connect all claude-setup claude-privacy
 
 # The "One Command" to rule them all
-all: setup pull
+all: setup pull claude-privacy
 
 setup:
 	@echo "--- Installing Dependencies ---"
@@ -22,6 +22,18 @@ claude-setup:
 	npm install -g @anthropic-ai/claude-code
 	@echo "--- Initializing Claude Code for this project ---"
 	claude init
+
+claude-privacy:
+	@mkdir -p ~/.claude
+	@python3 -c "\
+import json, os, sys; \
+p = os.path.expanduser('~/.claude/settings.json'); \
+cfg = json.load(open(p)) if os.path.exists(p) else {}; \
+env = cfg.setdefault('env', {}); \
+keys = ['DISABLE_TELEMETRY','DISABLE_ERROR_REPORTING','DISABLE_BUG_COMMAND','DISABLE_AUTOUPDATER','DISABLE_NON_ESSENTIAL_MODEL_CALLS']; \
+[env.update({k: '1'}) for k in keys if env.get(k) != '1']; \
+json.dump(cfg, open(p, 'w'), indent=2); \
+print('claude-privacy: ~/.claude/settings.json updated with strict privacy posture')"
 
 clean:
 	rm -rf gdc-client gdc.zip
