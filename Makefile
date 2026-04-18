@@ -1,5 +1,5 @@
 # Professional Bootstrap for MASH Project
-.PHONY: setup pull connect all
+.PHONY: setup pull connect all claude-setup
 
 # The "One Command" to rule them all
 all: setup pull
@@ -16,6 +16,12 @@ setup:
 pull:
 	@echo "--- Pulling MASH Dataset ---"
 	./gdc-client download -m accessory_data/TCGA-LIHC_manifest_small.txt
+
+claude-setup:
+	@echo "--- Installing Claude Code ---"
+	npm install -g @anthropic-ai/claude-code
+	@echo "--- Initializing Claude Code for this project ---"
+	claude init
 
 clean:
 	rm -rf gdc-client gdc.zip
