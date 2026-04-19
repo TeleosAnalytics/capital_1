@@ -1,3 +1,4 @@
+data/
 *.svs
 *.zip
 *.ome.zarr/
