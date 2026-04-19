@@ -15,6 +15,7 @@ setup:
 
 pull:
 	@echo "--- Pulling MASH Dataset ---"
+	mkdir -p data/landing_zone
 	./gdc-client download -m accessory_data/TCGA-LIHC_manifest_small.txt -d data/landing_zone/
 
 claude-setup:
