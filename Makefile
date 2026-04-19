@@ -1,8 +1,20 @@
-# Professional Bootstrap for MASH Project
-.PHONY: setup pull connect all claude-setup claude-privacy
+.PHONY: setup pull connect all tools claude-login claude-setup claude-privacy clean
 
 # The "One Command" to rule them all
-all: setup pull claude-privacy
+all: setup pull tools claude-privacy claude-login
+
+tools:
+	sudo apt-get update
+	sudo apt-get install -y --no-install-recommends ca-certificates curl gnupg
+	sudo apt-get purge -y nodejs npm libnode-dev libnode72 nodejs-doc || true
+	sudo apt-get autoremove -y || true
+	curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+	sudo apt-get install -y --no-install-recommends nodejs
+	sudo npm install -g @anthropic-ai/claude-code
+
+claude-login:
+	claude
+
 
 setup:
 	@echo "--- Installing Dependencies ---"
