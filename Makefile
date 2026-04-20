@@ -1,7 +1,7 @@
 .PHONY: setup pull connect all tools claude-login claude-setup claude-privacy clean
 
 # The "One Command" to rule them all
-all: setup pull tools claude-privacy claude-login
+all: setup pull tools claude-privacy claude-login jupyter
 
 tools:
 	sudo apt-get update
@@ -19,6 +19,9 @@ claude-login:
 setup:
 	@echo "--- Installing Dependencies ---"
 	pip install -r requirements.txt
+	@echo "--- Injecting JupyterLab Shortcuts ---"
+	mkdir -p ~/.jupyter/lab/user-settings/@jupyterlab/shortcuts-extension/
+	echo '{"shortcuts":[{"command":"notebook:run-cell-and-insert-below","keys":["Alt Enter"],"selector":".jp-Notebook.jp-mod-editMode","disabled":true},{"command":"notebook:run-in-console","keys":["Alt Enter"],"selector":".jp-Notebook.jp-mod-editMode"}]}' > ~/.jupyter/lab/user-settings/@jupyterlab/shortcuts-extension/shortcuts.jupyterlab-settings
 	@echo "--- Fetching GDC Client ---"
 	wget -q -O gdc.zip https://gdc.cancer.gov/files/public/file/gdc-client_v1.6.1_Ubuntu_x64.zip
 	unzip -o gdc.zip
@@ -50,3 +53,7 @@ print('claude-privacy: ~/.claude/settings.json updated with strict privacy postu
 
 clean:
 	rm -rf gdc-client gdc.zip
+
+jupyter:
+	@echo "--- Starting JupyterLab on Port 8888 ---"
+	jupyter lab --no-browser --port=8888
