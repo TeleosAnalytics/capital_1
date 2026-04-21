@@ -1,0 +1,10 @@
+README.md
+pyproject.toml
+src/mash_model_1_0/__init__.py
+src/mash_model_1_0/config.py
+src/mash_model_1_0/hello_world.py
+src/mash_model_1_0.egg-info/PKG-INFO
+src/mash_model_1_0.egg-info/SOURCES.txt
+src/mash_model_1_0.egg-info/dependency_links.txt
+src/mash_model_1_0.egg-info/requires.txt
+src/mash_model_1_0.egg-info/top_level.txt
