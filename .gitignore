@@ -3,4 +3,5 @@ data/
 *.zip
 *.ome.zarr/
 gdc-client
-Notebooks/
+Notebooks/*
+!Notebooks/00*
