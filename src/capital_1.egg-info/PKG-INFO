@@ -1,5 +1,5 @@
 Metadata-Version: 2.4
-Name: mash_model_1_0
+Name: capital_1
 Version: 0.1.0
 Summary: Mash model package scaffold.
 Author: Your Name
@@ -10,6 +10,6 @@ Requires-Dist: pytest; extra == "dev"
 Requires-Dist: ruff; extra == "dev"
 Requires-Dist: mypy; extra == "dev"
 
-# mash_model_1_0
+# capital_1
 
-Python package scaffold for `mash_model_1_0`.
+Python package scaffold for `capital_1`.

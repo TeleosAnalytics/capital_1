@@ -4,13 +4,11 @@
 # In[1]:
 
 
-import mash_model_1_0 as mm
+import capital_1 as cptl
 
 
 # In[9]:
 
-
-import mash_model_1_0 as mm
 
 # This is the path
 print(mm.config.proj_path)

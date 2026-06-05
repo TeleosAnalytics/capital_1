@@ -1,0 +1,26 @@
+---
+title: "Creating microposts"
+format:
+  html:
+    code-fold: true
+    embed-resources: true
+execute:
+  echo: true
+---
+
+So I'm on the 4th day of my micropost publishing routine. Today I reactivated my thunder compute account 
+and pulled my git repo to create my post from the thunder instance. The point is I'm going to need GPUs for
+my image analysis content and business. So Thunder compute is a service platform where you can rent GPUs and a remote 
+server location for your compute needs. It's great and affordable but it doesn't simpultaneously provide storage. 
+To solve the storage problem, one hooks up another storage service such as a google account or aws. Then one pulls 
+data on demand during trainin or inference. It seems clunky but it scales. 
+
+# A Test Plot
+
+```{python}
+%matplotlib inline
+import matplotlib.pyplot as plt
+
+plt.plot([1, 2, 3], [4, 5, 6])
+plt.title("Test Chart")
+```

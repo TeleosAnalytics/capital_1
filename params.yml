@@ -1,5 +1,5 @@
 project:
-  name: mash_model_1_0
+  name: capital_1
 
 model:
   random_seed: 42

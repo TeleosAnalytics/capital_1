@@ -1,0 +1,10 @@
+README.md
+pyproject.toml
+src/capital_1/__init__.py
+src/capital_1/config.py
+src/capital_1/hello_world.py
+src/capital_1.egg-info/PKG-INFO
+src/capital_1.egg-info/SOURCES.txt
+src/capital_1.egg-info/dependency_links.txt
+src/capital_1.egg-info/requires.txt
+src/capital_1.egg-info/top_level.txt
