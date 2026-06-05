@@ -1,19 +1,25 @@
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Linux)
+	GDC_URL = https://gdc.cancer.gov/files/public/file/gdc-client_v1.6.1_Ubuntu_x64.zip
+else
+	GDC_URL = https://gdc.cancer.gov/files/public/file/gdc-client_v1.6.1_OSX_x64.zip
+endif
 .PHONY: setup pull connect all tools claude-login claude-setup claude-privacy clean
 
 # The "One Command" to rule them all
 all: setup pull tools claude-privacy claude-login jupyter
 
 tools:
-	sudo apt-get update
-	sudo apt-get install -y --no-install-recommends ca-certificates curl gnupg
-	sudo apt-get purge -y nodejs npm libnode-dev libnode72 nodejs-doc || true
-	sudo apt-get autoremove -y || true
-	curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
-	sudo apt-get install -y --no-install-recommends nodejs
-	sudo npm install -g @anthropic-ai/claude-code
+	#sudo apt-get update
+	#sudo apt-get install -y --no-install-recommends ca-certificates curl gnupg
+	#sudo apt-get purge -y nodejs npm libnode-dev libnode72 nodejs-doc || true
+	#sudo apt-get autoremove -y || true
+	#curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+	#sudo apt-get install -y --no-install-recommends nodejs
+	#sudo npm install -g @anthropic-ai/claude-code
 
 claude-login:
-	claude
+	#claude
 
 
 setup:
@@ -23,7 +29,8 @@ setup:
 	mkdir -p ~/.jupyter/lab/user-settings/@jupyterlab/shortcuts-extension/
 	echo '{"shortcuts":[{"command":"notebook:run-cell-and-insert-below","keys":["Alt Enter"],"selector":".jp-Notebook.jp-mod-editMode","disabled":true},{"command":"notebook:run-in-console","keys":["Alt Enter"],"selector":".jp-Notebook.jp-mod-editMode"}]}' > ~/.jupyter/lab/user-settings/@jupyterlab/shortcuts-extension/shortcuts.jupyterlab-settings
 	@echo "--- Fetching GDC Client ---"
-	wget -q -O gdc.zip https://gdc.cancer.gov/files/public/file/gdc-client_v1.6.1_Ubuntu_x64.zip
+	#wget -q -O gdc.zip https://gdc.cancer.gov/files/public/file/gdc-client_v1.6.1_OSX_x64.zip
+	wget -q -O gdc.zip $(GDC_URL)
 	unzip -o gdc.zip
 	rm gdc.zip
 	chmod +x gdc-client
