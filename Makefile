@@ -37,7 +37,7 @@ setup:
 	chmod +x gdc-client
 
 pull:
-	@echo "--- Pulling MASH Dataset ---"
+	@echo "--- Pulling Liver HE Dataset ---"
 	mkdir -p data/landing_zone
 	./gdc-client download -m accessory_data/TCGA-LIHC_manifest_small.txt -d data/landing_zone/
 

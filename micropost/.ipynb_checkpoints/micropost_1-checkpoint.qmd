@@ -1,5 +1,5 @@
 ---
-title: "Creating microposts"
+title: "Building Capital"
 format:
   html:
     code-fold: true
@@ -8,19 +8,66 @@ execute:
   echo: true
 ---
 
-So I'm on the 4th day of my micropost publishing routine. Today I reactivated my thunder compute account 
-and pulled my git repo to create my post from the thunder instance. The point is I'm going to need GPUs for
-my image analysis content and business. So Thunder compute is a service platform where you can rent GPUs and a remote 
-server location for your compute needs. It's great and affordable but it doesn't simpultaneously provide storage. 
-To solve the storage problem, one hooks up another storage service such as a google account or aws. Then one pulls 
-data on demand during trainin or inference. It seems clunky but it scales. 
+Ok I've been starting to build capital. I have a few simple functions and a simple notebook. I convert .svs images (the standart histopathological format) into ome.zarr fiels (the standart comp bio image format). Then I make some simple plots and test a masking function.
 
-# A Test Plot
+# Read and plot the HE image with reduced resolution
 
 ```{python}
 %matplotlib inline
-import matplotlib.pyplot as plt
 
-plt.plot([1, 2, 3], [4, 5, 6])
-plt.title("Test Chart")
+import capital_1 as cptl
+import pandas as pd
+
+metadf = cptl.IO.get_metadf()
+
+import zarr
+import matplotlib.pyplot as plt
+import numpy as np
+
+zarr_path = metadf.iloc[0]['zarr_path']
+
+z = zarr.open(str(zarr_path), mode='r')
+low_res_arr = z[::4,::4,:]
+
+plt.figure(figsize=(10, 10))
+plt.imshow(low_res_arr)
+plt.show()
+```
+
+#plot a zoomed in crop
+```{python}
+%matplotlib inline
+plt.figure(figsize=(20, 20))
+plt.imshow(z[16000:17000,16000:17000,:])
+plt.axis('off')
+plt.show()
+```
+
+#Test the masking function and plot the mask
+
+```{python}
+%matplotlib inline
+from skimage.color import rgb2hsv
+
+mask = cptl.IO.get_tissue_mask(low_res_arr)
+
+# Plot the proof
+fig, axes = plt.subplots(1, 3, figsize=(18, 6))
+
+axes[0].imshow(low_res_arr)
+axes[0].set_title("Original RGB")
+axes[0].axis('off')
+
+# Show the raw saturation channel (Tissue will be bright, background dark)
+axes[1].imshow(rgb2hsv(low_res_arr)[:, :, 1], cmap='gray')
+axes[1].set_title("Saturation Channel")
+axes[1].axis('off')
+
+# Show the final boolean mask
+axes[2].imshow(mask, cmap='gray')
+axes[2].set_title("Otsu Binary Mask")
+axes[2].axis('off')
+
+plt.tight_layout()
+plt.show()
 ```
